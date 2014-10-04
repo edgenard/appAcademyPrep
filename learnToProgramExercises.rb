@@ -105,7 +105,7 @@ Chapter 3: Letters                                    page 13
 
 2. Deaf Grandma. Whatever you say (type in), she should respond with this:
 HUH?! SPEAK UP, SONNY!
-unless you shout it(type itin all capitals). If you shout, she can hear you (or at least she thinks so) and yells back:
+unless you shout it(type it in all capitals). If you shout, she can hear you (or at least she thinks so) and yells back:
 NO NOT SINCE 1938!
 To make your program really believable, have Grandma shout a different year each time, maybe any year at random between 
 1930 and 1950. You can't stop talking to Grandma until you shout BYE.
@@ -120,25 +120,64 @@ by 100 are not leap years unless they are also divisible by 400.
 =end
 
 #99 Bottles of Beer
-bottles = 99
-while bottles >= 0
-  if bottles > 1
-    puts bottles.to_s + " bottles of beer on the wall, " + bottles.to_s + " bottles of beer."
-    bottles = bottles - 1
-    puts "Take one down and pass it around, " + bottles.to_s + " bottles of beer on the wall."
-  elsif bottles == 1
-    puts bottles.to_s + ' bottle of beer on the wall, ' + bottles.to_s + ' bottle of beer.'
-    bottles = bottles - 1
-    puts "Take one down and pass it around, no more bottles of beer on the wall."
-  else
-    puts "No more bottles of beer on the wall, no more bottles of beer."
-    puts "Go to the store and buy some more, 99 bottles of beer on the wall."
+# bottles = 99
+# while bottles >= 0
+#   if bottles > 1
+#     puts bottles.to_s + " bottles of beer on the wall, " + bottles.to_s + " bottles of beer."
+#     bottles = bottles - 1
+#     puts "Take one down and pass it around, " + bottles.to_s + " bottles of beer on the wall."
+#   elsif bottles == 1
+#     puts bottles.to_s + ' bottle of beer on the wall, ' + bottles.to_s + ' bottle of beer.'
+#     bottles = bottles - 1
+#     puts "Take one down and pass it around, no more bottles of beer on the wall."
+#   else
+#     puts "No more bottles of beer on the wall, no more bottles of beer."
+#     puts "Go to the store and buy some more, 99 bottles of beer on the wall."
+#     break
+#   end
+# end
+
+
+#Deaf Grandma and Deaf Grandma extended
+puts "Speak to your Nana"
+nana_huh = "HUH?! SPEAK UP SONNY!"
+nana_no = "NO! NOT SINCE "
+
+while true
+  year = 1900
+  say_to_nana = gets.chomp
+  while !(say_to_nana == say_to_nana.upcase)
+    puts nana_huh
+    say_to_nana = gets.chomp
+  end
+  if say_to_nana == "BYE"
+    bye_count = 1
+    while bye_count < 3
+      puts nana_huh
+      say_to_nana = gets.chomp
+      if say_to_nana != "BYE"
+        bye_count = bye_count - 1
+      else
+        bye_count = bye_count + 1
+      end  
+    end
+    puts "OH, OK...BYE"
     break
+  elsif say_to_nana == say_to_nana.upcase
+    rando = rand(30)
+    if rando <= 8
+      year = (year + rando + 30).to_s + "!"
+    else
+      year = (year + rando + 21).to_s + "!"
+    end
+    puts nana_no + year
   end
 end
 
 
 
+  
+  
 
 
 
