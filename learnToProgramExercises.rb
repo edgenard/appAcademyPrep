@@ -258,16 +258,17 @@ toc.length.times do |index|
 end
 =end
 
+#9.5 A few things to try
 =begin
-9.5 A few things to try
 1. Improved ask method. That ask method I showed you was OK, but I bet you could 
-do better. Try to clean it up by removing the answer variable. You’ll have to
-use return to exit from the loop. (Well, it will get you out of the whole 
-method, but it will get you out of the loop n the process.) How do you like the
+do better. Try to clean it up by removing the answer variable. You’ll have to use 
+return to exit from the loop. Well, it will get you out of the whole method,
+but it will get you out of the loop n the process. How do you like the
 resulting method? I usually try to avoid using return (a personal preference), 
 but I might make an exception here.
 =end
 
+=begin
 def ask question
   while true
     puts question
@@ -293,10 +294,18 @@ ask 'Do you like eating burritos?'
 wets_bed = ask 'Do you wet the bed?'
 ask 'Do you like eating chimichangas?'
 ask 'Do you like drinking horchata?'
+=end
 
-
-
-
+#Old School Roman numerals.
+=begin
+n the early days of Roman numerals, the Romans didn’t bother with any of this 
+new-fangled subtraction “IX” nonsense. No sir, it was straight addition, biggest 
+to littlest—so 9 was written “VIIII,” and so on. Write a method that when passed an 
+integer between 1 and 3000 (or so) returns a string containing the proper old-school 
+Roman numeral. In other words, old_roman_numeral 4 should return 'IIII'. Make sure to 
+test your method on a bunch of different numbers. Hint: Use the inte- ger division and 
+modulus methods on page 37.
+=end
 
 
 
