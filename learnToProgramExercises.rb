@@ -243,6 +243,7 @@ the information from the array in a beautifully formatted table of contents.
 # puts array
 
 #Table of Contents
+=begin
 toc = [["Table of Contents"], ["Chapter 1: Getting Started", "page 1"], ["Chapter 2: Numbers", "page 9"],
 ["Chapter 3: Letters", "page 13"] ]
 
@@ -255,6 +256,43 @@ toc.length.times do |index|
     puts toc[index][0].ljust((line_width * 0.66).to_i) + toc[index][1].rjust((line_width * 0.33).to_i)
   end
 end
+=end
+
+=begin
+9.5 A few things to try
+1. Improved ask method. That ask method I showed you was OK, but I bet you could 
+do better. Try to clean it up by removing the answer variable. You’ll have to
+use return to exit from the loop. (Well, it will get you out of the whole 
+method, but it will get you out of the loop n the process.) How do you like the
+resulting method? I usually try to avoid using return (a personal preference), 
+but I might make an exception here.
+=end
+
+def ask question
+  while true
+    puts question
+    reply = gets.chomp
+    if (reply == 'yes' || reply == 'no')
+      if reply == 'yes'
+        return true
+      else
+        return false
+      end
+    else
+      puts "Please reply with a 'yes' or 'no'"
+    end
+  end
+end
+
+puts 'Hello and thank you for participating in this survey. Please answer each 
+question with "yes" or "no"'
+puts
+
+ask 'Do you like eating tacos?'
+ask 'Do you like eating burritos?'
+wets_bed = ask 'Do you wet the bed?'
+ask 'Do you like eating chimichangas?'
+ask 'Do you like drinking horchata?'
 
 
 
