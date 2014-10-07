@@ -435,7 +435,7 @@ end
 
 
 #tests
-words = ['john', 'john', 'michael', 'billy', 'wile', 'simon', 'willie', 'john', 'eric', 'phil', 'zoolander', 'fran', 'ian', 'kevin', 'larry', 'barry', 'chuck', 'alan' ]
+words = ['john', 'john', 'michael', 'billy', 'wile', 'simon', 'willie', 'john', 'eric', 'phil', 'zoolander', 'fran', 'ian', 'kevin', 'larry', 'barry', 'chuck', 'alan']
 
 puts 'The auto Sort gives:'
 puts words.sort
