@@ -257,17 +257,9 @@ toc.length.times do |index|
   end
 end
 =end
-
-#9.5 A few things to try
 =begin
-1. Improved ask method. That ask method I showed you was OK, but I bet you could 
-do better. Try to clean it up by removing the answer variable. You’ll have to use 
-return to exit from the loop. Well, it will get you out of the whole method,
-but it will get you out of the loop n the process. How do you like the
-resulting method? I usually try to avoid using return (a personal preference), 
-but I might make an exception here.
+#9.5 A few things to try Improved ask method. That ask method I showed you was OK, but I bet you could do better. Try to clean it up by removing the answer variable. You’ll have to use return to exit from the loop. Well, it will get you out of the whole method,but it will get you out of the loop n the process. How do you like the resulting method? I usually try to avoid using return (a personal preference), but I might make an exception here.
 =end
-
 =begin
 def ask question
   while true
@@ -298,24 +290,160 @@ ask 'Do you like drinking horchata?'
 
 #Old School Roman numerals.
 =begin
-n the early days of Roman numerals, the Romans didn’t bother with any of this 
+In the early days of Roman numerals, the Romans didn’t bother with any of this 
 new-fangled subtraction “IX” nonsense. No sir, it was straight addition, biggest 
 to littlest—so 9 was written “VIIII,” and so on. Write a method that when passed an 
 integer between 1 and 3000 (or so) returns a string containing the proper old-school 
 Roman numeral. In other words, old_roman_numeral 4 should return 'IIII'. Make sure to 
-test your method on a bunch of different numbers. Hint: Use the inte- ger division and 
+test your method on a bunch of different numbers. Hint: Use the integer division and 
 modulus methods on page 37.
+=end
+=begin
+def old_roman number
+  roman_string = ''
+  roman_array = [[1000, 'M'], [500, 'D'], [100, 'C'], [50, 'L'], [10, 'X'], 
+  [5, 'V'], [1, 'I'],]
+  roman_array.each do |value|
+    count = number / value[0]
+    roman_string = roman_string + (value[1] * count)
+    number = number - (count * value[0])
+  end
+  return roman_string
+end
+
+# puts old_roman 4
+# puts old_roman 14  #'XIII'
+# puts old_roman 25 # 'XXV'
+# puts old_roman 94 # 'LXXXXIIII'
+# puts old_roman 106 # 'CVI'
+# puts old_roman 999 # 'DCCCCLXXXXVIIII'
+# puts old_roman 2400 # 'MMCCCC'
+# puts old_roman 444 #'CCCCXXXXIIII'
+# puts old_roman 2999 # 'MMDCCCCLXXXXVIIII'
+=end
+=begin
+“Modern” Roman numerals. Eventually, someone thought it would be terribly clever if putting a smaller number before a larger one meant you had to subtract the smaller one. As a result of this development, you must now suffer. Rewrite your previous method to return the new-style Roman numerals so when someone calls roman_numeral 4, it should return 'IV'
+=end
+
+=begin
+def new_roman number
+  roman_string = ''
+  roman_array = [[1000, 'M'], [500, 'D'], [100, 'C'], [50, 'L'], [10, 'X'], 
+  [5, 'V'], [1, 'I'],]
+  roman_array.each do |value|
+    count = number / value[0]
+    previous_index = roman_array.index(value) - 1
+    next_index = roman_array.index(value) + 1
+    previous_value = roman_array[previous_index]
+    next_value = roman_array[next_index]
+    
+    if count == 1 && (number - value[0]) == 9 && (number - value[0]) % 4 != 0 
+      roman_string = roman_string + next_value[1] + previous_value[1]
+      number = number - (previous_value[0] - next_value[0])
+    elsif count == 4 #check if 4
+      roman_string = roman_string + value[1] + previous_value[1]
+      number = number - (count * value[0])
+    else
+      roman_string = roman_string + (value[1] * count)
+      number = number - (count * value[0])
+    end
+  end
+  return roman_string
+end
+
+
+puts new_roman 4 # 'IV'
+puts new_roman 9 # 'IX'
+puts new_roman 14 # 'XIV'
+puts new_roman 19 # 'XIX'
+puts new_roman 94 # 'XCIV'
+puts new_roman 104 #'CIV'
+puts new_roman 109 # 'CIX'
+# puts new_roman 999 # 'CMXCIX'
+# puts new_roman 2400 # 'MMCD'
+puts new_roman 444 # 'CDXLIV'
+# puts new_roman 2999 # 'MMCMXCIX'
+
 =end
 
 
+#Continent Size Example from Chapter 10
+=begin
+M = 'land'
+o = 'water'
+world = [[o,o,o,o,M,o,o,o,o,o,M], 
+         [o,o,o,o,M,M,o,o,o,M,o], 
+         [o,o,o,M,o,o,o,o,M,M,o], 
+         [o,o,o,M,o,o,o,M,o,M,o], 
+         [o,o,o,M,o,M,M,o,o,o,o], 
+         [o,o,o,o,M,M,M,M,o,o,o], 
+         [o,o,o,M,M,M,M,M,M,M,M], 
+         [o,o,o,M,M,o,M,M,M,o,o], 
+         [o,o,M,o,o,o,M,M,o,o,o], 
+         [o,M,o,o,o,M,o,o,M,o,o], 
+         [M,o,o,o,o,o,o,o,o,M,M]]
+
+def continent_size world, x, y
+  if y > (world.length - 1) || y < 0
+    return 0
+  elsif x > (world[y].length - 1) || x < 0
+    return 0
+  elsif world[y][x] != 'land' 
+    return 0
+  end
+  size = 1
+  world[y][x] = 'counted land'
+  size = size + continent_size(world, x-1,  y-1) #above left
+  size = size + continent_size(world, x  ,  y-1) #above
+  size = size + continent_size(world, x+1,  y-1) #above right
+  size = size + continent_size(world, x-1,    y) #left
+  size = size + continent_size(world, x+1,    y) #right
+  size = size + continent_size(world, x  ,  y+1) #below
+  size = size + continent_size(world, x+1,  y+1) #below right
+  size = size + continent_size(world, x-1,  y+1) #below left
+  
+  size
+end
+puts continent_size(world, 5 , 5)
+
+=end
+
+#Sorting algorithm example from Chapter 10
+
+#Iterative Method
+def my_sort word_array
+  sorted_array = []
+  smallest = word_array[0]
+  while word_array.length > 0
+    word_array.each do |word|
+      if word < smallest
+        smallest = word
+      end
+    end
+    sorted_array << smallest
+    word_array.delete_at(word_array.index(smallest))
+    smallest = word_array[0]
+  end
+  puts 'my_sort gives: '
+  puts sorted_array
+  return sorted_array
+end
+
+
+#Recursive Method
 
 
 
+#tests
+words = ['john', 'john', 'michael', 'billy', 'wile', 'simon', 'willie', 'john', 'eric', 'phil', 'zoolander', 'fran', 'ian', 'kevin', 'larry', 'barry', 'chuck', 'alan' ]
 
+puts 'The auto Sort gives:'
+puts words.sort
 
-
-
-
-
+if my_sort(words) == words.sort
+  puts true
+else
+  puts false
+end
 
 
