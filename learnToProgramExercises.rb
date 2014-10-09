@@ -411,6 +411,7 @@ puts continent_size(world, 5 , 5)
 #Sorting algorithm example from Chapter 10
 
 #Iterative Method
+=begin
 def my_sort word_array
   sorted_array = []
   smallest = word_array[0]
@@ -428,22 +429,213 @@ def my_sort word_array
   puts sorted_array
   return sorted_array
 end
+=end
+
+#Recursive Method with dictionary sort
+=begin
+def my_sort word_array
+  recursive_sort word_array, []
+end
+
+def recursive_sort unsorted_array, sorted_array
+  if unsorted_array.length == 1
+    return sorted_array << unsorted_array[0]
+  end
+  smallest = unsorted_array[0]
+  unsorted_array.each do |word|
+    if word.downcase < smallest.downcase
+      smallest = word
+    end
+  end
+  sorted_array << smallest
+  unsorted_array.delete_at(unsorted_array.index(smallest))
+  recursive_sort(unsorted_array, sorted_array)
+end
 
 
-#Recursive Method
+#tests for Sorting algorithm
 
+words = ['John', 'john', 'michael', 'Billy', 'wile', 'simon', 'willie', 'john', 'eric', 'phil', 'zoolander', 'Fran', 'ian', 'kevin', 'Larry', 'barry', 'chuck', 'alan']
 
-
-#tests
-words = ['john', 'john', 'michael', 'billy', 'wile', 'simon', 'willie', 'john', 'eric', 'phil', 'zoolander', 'fran', 'ian', 'kevin', 'larry', 'barry', 'chuck', 'alan']
-
+auto_sort = words.sort
+puts 'My sort returns: '
+puts my_sort(words)
+puts
 puts 'The auto Sort gives:'
-puts words.sort
+puts auto_sort
 
 if my_sort(words) == words.sort
   puts true
 else
   puts false
 end
+=end
+
+
+#10.3 Shuffle Algorithm
+=begin
+def new_index shuffled_array, og_length, og_index
+  index = rand(og_length)
+  if shuffled_array[index] != nil || index == og_index
+    return new_index(shuffled_array, og_length, og_index)
+  else
+    return index
+  end
+end
+
+def shuffle og_array
+  shuffled = []
+  og_length = og_array.length
+  og_array.each do |item|
+    if og_array.index(item) == og_length - 1 && shuffled.length == og_length - 1
+      shuffled.unshift(item)
+    else
+      index = new_index(shuffled, og_length, og_array.index(item))
+      puts 'the new index for ' + item.to_s + ' is ' + index.to_s
+      shuffled[index] = item 
+    end
+
+  end
+  return shuffled
+end
+
+
+#tests for Shuffling algorithm
+old_array = [1, 2, 3,4]
+shuffled_array = shuffle(old_array)
+
+puts 'old array is '
+puts old_array
+puts
+puts 'shuffled is '
+puts shuffled_array
+=end
+
+#10.5 English Number
+def english_number number
+  if number < 0 #No negative numbers
+    return 'Please enter a number that is not negative.'
+  end
+  if number == 0
+    return 'zero'
+  end
+  
+  num_string = '' #This is the string we will return.
+  
+  ones_place = ['one',   'two',   'three',
+                'four',  'five',  'six',
+                'seven', 'eight', 'nine']
+  
+  tens_place = ['ten',     'twenty',   'thirty',
+                'forty',   'fifty',    'sixty',
+                'seventy', 'eighty',   'ninety']
+  
+  
+  teenagers = ['eleven',    'twelve',    'thirteen',
+               'fourteen',   'fifteen',  'sixteen',
+               'seventeen',   'eighteen', 'nineteen']
+               
+  
+  
+  
+  left = number
+  
+  # Millions
+  write = left/1000000
+  left = left - write * 1000000
+  
+  if write > 0
+    millions = english_number write
+    num_string = num_string + millions + ' million'
+    if left > 0
+      num_string = num_string + ' '
+    end
+  end
+  
+  # Thousands
+  write = left/1000
+  left = left - write * 1000
+  
+  if write > 0
+    thousands = english_number write
+    num_string = num_string + thousands + ' thousand'
+    if left > 0
+      num_string = num_string + ' '
+    end
+  end
+  
+
+  write = left/100 # How many hundreds
+  left = left - write*100 # Subtract off those hundreds
+  
+  
+  # Hundreds
+  if write > 0
+    hundreds = english_number write
+    num_string = num_string + hundreds + ' hundred'
+    if left > 0
+      num_string = num_string + ' '
+    end
+  end
+  
+  write = left/10
+  left = left - write*10
+  
+  if write > 0
+    if ((write == 1) and (left > 0))
+      # We are dealing with a teenager
+      num_string = num_string + teenagers[left - 1]
+      left = 0
+    else
+      num_string = num_string + tens_place[write - 1]
+    end
+    if left > 0
+      num_string = num_string + '-' # To avoid fourtyfour and put forty-four
+    end
+  end
+  
+  write = left #At this point only the ones are left
+  left = 0
+  
+  if write > 0
+    num_string = num_string + ones_place[write - 1]
+  end
+  
+  num_string #All that is left is to return the string
+  
+end
+
+# puts english_number(1500)
+# puts english_number(3500)
+# puts english_number(30300)
+# puts english_number(300000)
+# puts english_number(333000)
+# puts english_number(333300)
+# puts english_number(33333333)
+
+# 99 Bottles of Beer
+bottles = 99
+while bottles > 2
+  
+  bottle_string = (english_number bottles)
+  puts bottle_string.capitalize + " bottles of beer on the wall, " + bottle_string + " bottles of beer."
+  bottles = bottles - 1
+  bottle_string = english_number bottles
+  puts "Take one down and pass it around, " + bottle_string + " bottles of beer on the wall."
+end
+
+puts 'Two bottles of beer on the wall, two bottles of beer,'
+puts 'Take one down and pass it around, one bottle of beer on the wall.'
+
+puts 'One bottle of beer on the wall, one bottle of beer.'
+puts 'Take it down and pass it around, no more bottles of beer on the wall'
+bottles = 99
+puts "No more bottles of beer on the wall, no more bottles of beer."
+puts "Go to the store and buy some more, " + bottles.to_s + " bottles of beer on the wall."
+
+
+
+
+
 
 
