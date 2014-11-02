@@ -12,14 +12,14 @@ text = lines.join
 
 #stop_words is a list of some words that have no meaning on their own
 stop_words = %w{the that this they then a many some each in
-				over around under beside between near of to and
-				or but either neither nor hence consequently therefore
-				nevertheless while when where although unless if had will
-				other there any was did too to as on an at into}
+        over around under beside between near of to and
+        or but either neither nor hence consequently therefore
+        nevertheless while when where although unless if had will
+        other there any was did too to as on an at into}
 
 #ideal_words is a list of words that may indicate the sentence is an ideal_sentence
 ideal_words = ["is", "are", "was", "will", "will be", "will have", "will have been", "has", "has been", "had", "had been",
-				"may", "may be", "might", "might be"]
+        "may", "may be", "might", "might be"]
 
 #Count the characters and characters excluding spaces
 total_characters = text.length
