@@ -98,7 +98,13 @@ describe Temperature do
   # run *all* the tests during your refactoring, to make sure you did it right
   #
   describe "utility class methods" do
+    it "converts fahrenheit to celsius" do
+      Temperature.new(:f => 50).ftoc == 10
+    end
 
+    it "converts celsius to fahrenheit" do
+      Temperature.new(:c => 10).ctof == 50
+    end
   end
 
   # Here's another way to solve the problem!
