@@ -8,7 +8,15 @@ class Timer
     hours = @seconds / 3600
     minutes = (@seconds - (hours * 3600)) / 60
     seconds = @seconds - (hours * 3600) - (minutes * 60)
-    "#{hours}:#{minutes}:#{seconds}" 
+    "#{padded(hours)}:#{padded(minutes)}:#{padded(seconds)}" 
+  end
+
+  def padded(number)
+    if number.to_s.length < 2
+      return ("0" + number.to_s)
+    else
+      return number.to_s
+    end
   end
   
 end
