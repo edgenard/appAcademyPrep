@@ -47,7 +47,7 @@ class RPNCalculator
   end
 
   def evaluate(string)
-    tokens(string).map! do |token|
+    self.tokens(string).map! do |token|
       if token.is_a?(Integer)
         self.push(token)
       elsif token == :*
@@ -60,7 +60,9 @@ class RPNCalculator
           self.minus
       end
     end
+
     self.value
+    
   end
 
   private
