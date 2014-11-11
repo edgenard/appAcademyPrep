@@ -21,20 +21,18 @@ class Temperature
     elsif options[:f] && options[:c]
       @in_celsius = options[:c]
       @in_fahrenheit = options[:f]
-
-    end
-
-    def Temperature.from_celsius(degrees)
-      new ({:c => degrees})
-    end
-
-    def Temperature.from_fahrenheit(degrees)
-      new ({:f => degrees})
-    end
-
-
-    
+    end  
   end
+
+
+  def self.from_celsius(degrees)
+    new ({:c => degrees})
+  end
+
+  def self.from_fahrenheit(degrees)
+    new ({:f => degrees})
+  end
+
 
 
 end
