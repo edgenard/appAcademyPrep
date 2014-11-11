@@ -7,14 +7,11 @@ def subtract(*numbers)
 end
 
 def sum(numbers)
-  if numbers.empty?
-    return 0
-  end
-  numbers.reduce(:+)
+  numbers.reduce(0, :+)
 end
 
 def multiply(*numbers)
-  numbers.reduce(:*)    
+  numbers.reduce(1, :*)    
 end
 
 def power(number, exponent)

@@ -7,7 +7,7 @@ def shout(text)
 end
 
 def repeat(text, times=2)
-  ("#{text} " * times).strip
+  ([text] * times).join(' ')
 end
 
 def start_of_word(word, number)

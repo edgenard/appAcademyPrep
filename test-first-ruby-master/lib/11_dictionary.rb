@@ -23,11 +23,9 @@ class Dictionary
 
   def printable
     keywords = @entries.keys.sort
-    printout = ""
-    keywords.each do |word|
-      printout = printout + "[#{word}] \"#{@entries[word]}\"\n"
-    end
-    printout.strip!
+    keywords.map do |word|
+      "[#{word}] #{@entries[word].inspect}"  
+    end.join("\n")
   end
 
 

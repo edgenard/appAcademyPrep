@@ -1,15 +1,14 @@
 def translate(text)
   words = text.split
   words = words.collect do |word|
-    if word[0] =~ /\A[aeiou]|\A[AEIOU]/ #Starts with vowel
+    if word[0] =~ /\A[aeiou]/i #Starts with vowel
       word = word + "ay"
-      if word[/!|\?|\.|:|;|,/] #Punctuation Check
-        punctuation = word[/!|\?|\.|:|;|,/]
+      if punctuation = word[/!|\?|\.|:|;|,/] #Punctuation Check
         word = word.delete(punctuation) + punctuation
       end
     word
-    elsif word[/\A(qu|[bcdfghjklmnpqrstvwxyz]qu)|\A(Qu|[BCDFGHJKLMNPQRSTVWXYZ]qu)/] #Starts with 'qu' or consonant + 'qu'
-      consonants = word[/\A(qu|[bcdfghjklmnpqrstvwxyz]qu)|\A(Qu|[BCDFGHJKLMNPQRSTVWXYZ]qu)/]
+    elsif word[/\A(qu|[bcdfghjklmnpqrstvwxyz]qu)/i] #Starts with 'qu' or consonant + 'qu'
+      consonants = word[/\A(qu|[bcdfghjklmnpqrstvwxyz]qu)/i]
       if word[/\A(QU|[BCDFGHJKLMNPQRSTVWXYZ]QU)/] #Capitalization check
         word = word.delete(consonants) + consonants.downcase + 'ay'
         word = word.capitalize
@@ -21,16 +20,15 @@ def translate(text)
         word = word.delete(punctuation) + punctuation
       end
       word
-    elsif word[0] =~ /[bcdfghjklmnpqrstvwxyz]|[BCDFGHJKLMNPQRSTVWXYZ]/
-      consonants = word[/\A[bcdfghjklmnpqrstvwxyz]+|\A[BCDFGHJKLMNPQRSTVWXYZ][bcdfghjklmnpqrstvwxyz]+|\A[BCDFGHJKLMNPQRSTVWXYZ]/]
+    elsif word[0] =~ /[bcdfghjklmnpqrstvwxyz]/i
+      consonants = word[/\A[bcdfghjklmnpqrstvwxyz]+/i]
       if word[/\A[BCDFGHJKLMNPQRSTVWXYZ]/]
          word = word.delete(consonants) + consonants.downcase + 'ay'
          word = word.capitalize
        else
          word = word.delete(consonants) + consonants + 'ay'
       end
-      if word[/!|\?|\.|:|;|,/]
-        punctuation = word[/!|\?|\.|:|;|,/]
+      if punctuation = word[/!|\?|\.|:|;|,/]
         word = word.delete(punctuation) + punctuation
       end
       word
