@@ -36,8 +36,31 @@ class RPNCalculator
     @calculator[-1]
   end
 
-  def method_name
-    
+  def tokens(string)
+    string.split.map! do |character|
+      if character =~ /\d/
+        character.to_i
+      else
+        character.to_sym
+      end
+    end
+  end
+
+  def evaluate(string)
+    tokens(string).map! do |token|
+      if token.is_a?(Integer)
+        self.push(token)
+      elsif token == :*
+          self.times
+      elsif token == :/
+          self.divide
+      elsif token == :+
+          self.plus
+      elsif token == :-
+          self.minus
+      end
+    end
+    self.value
   end
 
   private
@@ -53,3 +76,7 @@ class RPNCalculator
   end
 
 end
+
+
+
+
