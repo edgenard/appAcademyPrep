@@ -1,11 +1,12 @@
 class XmlDocument
-  attr_accessor :indents
+  attr_accessor :indents, :count
   def initialize (*indents)
-    if indents
+    if indents[0] == true
       @indents = true
     else
       @indents = false
     end
+    @count = 0;
   end
 
 
@@ -13,7 +14,9 @@ class XmlDocument
 
   def method_missing(meth, *args, &blk)
     this_instance = class << self; self; end
-
+    @count += 1
+    spaces = " "
+    indentation = ((spaces*(count - 1)) * 2)
     if block_given?
         this_instance.class_eval do
           define_method(meth) do
@@ -23,12 +26,11 @@ class XmlDocument
                 open_tag = open_tag + " #{key} ='#{value}'"
               end #end attribute.each
             end #end args.each
-            complete_tag = open_tag + ">" + "#{yield blk}" + "</#{meth}>"
             if @indents
-              open_tag = open_tag + ">\n"
+              complete_tag = indentation + open_tag + ">\n"  + "#{yield blk}" + indentation + "</#{meth}>\n"
             else
-              
-            end
+              complete_tag = open_tag + ">" + "#{yield blk}" + "</#{meth}>"
+            end#end of if @indents
             complete_tag
           end#end define_method
         end
@@ -39,11 +41,16 @@ class XmlDocument
           args.each do |attribute|
             attribute.each do |key, value|
               tag = tag + " #{key}='#{value}'"
-            end
+            end#end of attributes.each
+          end#end of args.each
+          if @indents
+            tag = indentation + tag + "/>\n"
+          else
+            tag = tag  + "/>"
           end
-          tag = tag  + "/>"
-        end
-      end
+          tag
+        end#end of define_method
+      end#end of this_instance
     end #end IF block
     send(meth)
   end #End method_missing
@@ -51,39 +58,6 @@ class XmlDocument
   #End of class
 end
 
-
-
-
-@xml = XmlDocument.new
-
-# p @xml
-
-# puts @xml.hello
-
-# tag_name = (1..8).map{|i| ('a'..'z').to_a[rand(26)]}.join
-# puts @xml.send(tag_name)
-
-# puts @xml.hello(:name => 'dolly')
-
-
-
-empty_tag = XmlDocument.new.empty
-
-p empty_tag
-
-
-attribute_tag = XmlDocument.new.attribute(:this => "that")
-
-p attribute_tag
-
-hello_dolly = @xml.hello do
-  "dolly"
-end
-
-
-p hello_dolly
-
-puts hello_dolly == "<hello>dolly</hello>"
 
 
 
