@@ -541,12 +541,12 @@ def english_number number
   left = number
   
   # Millions
-  write = left/1000000
+  write = left/1000000 #How many millions
   left = left - write * 1000000
   
   if write > 0
-    millions = english_number write
-    num_string = num_string + millions + ' million'
+    millions = english_number write #Call method on number of millions 
+    num_string = num_string + millions + ' million' 
     if left > 0
       num_string = num_string + ' '
     end
@@ -605,33 +605,33 @@ def english_number number
   
 end
 
-# puts english_number(1500)
-# puts english_number(3500)
-# puts english_number(30300)
-# puts english_number(300000)
-# puts english_number(333000)
-# puts english_number(333300)
-# puts english_number(33333333)
+puts english_number(1500)
+puts english_number(3500)
+puts english_number(30300)
+puts english_number(300000)
+puts english_number(333000)
+puts english_number(333300)
+puts english_number(33333333)
 
 # 99 Bottles of Beer
-bottles = 99
-while bottles > 2
+# bottles = 99
+# while bottles > 2
   
-  bottle_string = (english_number bottles)
-  puts bottle_string.capitalize + " bottles of beer on the wall, " + bottle_string + " bottles of beer."
-  bottles = bottles - 1
-  bottle_string = english_number bottles
-  puts "Take one down and pass it around, " + bottle_string + " bottles of beer on the wall."
-end
+#   bottle_string = (english_number bottles)
+#   puts bottle_string.capitalize + " bottles of beer on the wall, " + bottle_string + " bottles of beer."
+#   bottles = bottles - 1
+#   bottle_string = english_number bottles
+#   puts "Take one down and pass it around, " + bottle_string + " bottles of beer on the wall."
+# end
 
-puts 'Two bottles of beer on the wall, two bottles of beer,'
-puts 'Take one down and pass it around, one bottle of beer on the wall.'
+# puts 'Two bottles of beer on the wall, two bottles of beer,'
+# puts 'Take one down and pass it around, one bottle of beer on the wall.'
 
-puts 'One bottle of beer on the wall, one bottle of beer.'
-puts 'Take it down and pass it around, no more bottles of beer on the wall'
-bottles = 99
-puts "No more bottles of beer on the wall, no more bottles of beer."
-puts "Go to the store and buy some more, " + bottles.to_s + " bottles of beer on the wall."
+# puts 'One bottle of beer on the wall, one bottle of beer.'
+# puts 'Take it down and pass it around, no more bottles of beer on the wall'
+# bottles = 99
+# puts "No more bottles of beer on the wall, no more bottles of beer."
+# puts "Go to the store and buy some more, " + bottles.to_s + " bottles of beer on the wall."
 
 
 
