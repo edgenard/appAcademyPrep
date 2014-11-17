@@ -9,14 +9,10 @@ class XmlDocument
     @count = 0;
   end
 
-
-
-
   def method_missing(meth, *args, &blk)
     this_instance = class << self; self; end
     @count += 1
-    spaces = " "
-    indentation = ((spaces*(count - 1)) * 2)
+    indentation = ((" "*(count - 1)) * 2)
     if block_given?
         this_instance.class_eval do
           define_method(meth) do
@@ -24,15 +20,15 @@ class XmlDocument
             args.each do |attribute|
               attribute.each do |key, value|
                 open_tag = open_tag + " #{key} ='#{value}'"
-              end #end attribute.each
-            end #end args.each
+              end 
+            end 
             if @indents
               complete_tag = indentation + open_tag + ">\n"  + "#{yield blk}" + indentation + "</#{meth}>\n"
             else
               complete_tag = open_tag + ">" + "#{yield blk}" + "</#{meth}>"
-            end#end of if @indents
+            end
             complete_tag
-          end#end define_method
+          end
         end
     else
       this_instance.class_eval do
@@ -41,21 +37,19 @@ class XmlDocument
           args.each do |attribute|
             attribute.each do |key, value|
               tag = tag + " #{key}='#{value}'"
-            end#end of attributes.each
-          end#end of args.each
+            end
+          end
           if @indents
             tag = indentation + tag + "/>\n"
           else
             tag = tag  + "/>"
           end
           tag
-        end#end of define_method
-      end#end of this_instance
-    end #end IF block
+        end
+      end
+    end 
     send(meth)
-  end #End method_missing
-
-  #End of class
+  end 
 end
 
 
