@@ -51,14 +51,14 @@ answer = [1, 2, 3]
 
 
 def pile_pick(pile_1, pile_2, pile_3)
-  pick = gets.chomp
-  if pick == "1" && !pile_1.empty?
+  choice = gets.chomp
+  if choice == "1" && !pile_1.empty?
     puts "Picking from pile 1"
     pick = pile_1.shift  
-  elsif pick == "2" && !pile_2.empty?
+  elsif choice == "2" && !pile_2.empty?
     puts "Picking from pile 2" 
     pick = pile_2.shift
-  elsif pick == "3" && !pile_3.empty?
+  elsif choice == "3" && !pile_3.empty?
     puts "Picking from pile 3"
     pick = pile_3.shift   
   else
@@ -96,8 +96,9 @@ while pile_3 != answer
 
   pick = pile_pick(pile_1, pile_2, pile_3)
 
-
+  puts "You picked up #{pick}"
   puts "Where do you want to put your pick?"
+
   puts pile_state
 
   place_pick(pile_1, pile_2, pile_3, pick)
