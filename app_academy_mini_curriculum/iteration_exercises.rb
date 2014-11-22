@@ -52,8 +52,65 @@ def bubble_sort(arr)
   arr
 end
 
-test = [3, 1, 6, 2, 7, 4]
+# test = [3, 1, 6, 2, 7, 4]
 
-p bubble_sort(test)
+# p bubble_sort(test)
 
-p bubble_sort(test) == test.sort
+# p bubble_sort(test) == test.sort
+
+
+def substrings(string)
+  substring_array = []
+  index1 = 0
+  index2 = 0
+  while index1 < string.length
+    while index2 < string.length
+      substring_array << string[index1..index2]
+      index2 += 1
+    end
+    index1 += 1
+    index2 = index1
+  end
+  substring_array
+end
+
+p substrings("cat")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
