@@ -40,7 +40,7 @@
 #In a loop, prompt the user (using gets) and ask what pile to select a disc from, and where to put it.
 # After each move, check to see if they have succeeded in moving all the discs, to the final pile. If so, they win!
 
-require "debugger"
+#require "debugger"
 
 pile_1 = [1, 2, 3]
 pile_2 = []
@@ -55,18 +55,20 @@ def pile_pick(pile_1, pile_2, pile_3)
   if choice == "1" && !pile_1.empty?
     puts "Picking from pile 1"
     pick = pile_1.shift  
+    return pick
   elsif choice == "2" && !pile_2.empty?
     puts "Picking from pile 2" 
     pick = pile_2.shift
+    return pick
   elsif choice == "3" && !pile_3.empty?
     puts "Picking from pile 3"
-    pick = pile_3.shift   
+    pick = pile_3.shift  
+    return pick 
   else
     puts "Please choose a pile 1, 2 or 3 OR a pile that is NOT empty"
     puts "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3}"
     pile_pick(pile_1, pile_2, pile_3)
-  end
-  pick
+  end    
 end
 
 def place_pick(pile_1, pile_2, pile_3, pick)
@@ -108,8 +110,6 @@ end
 puts "You have solved the puzzle!!"
 
 puts "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3} "
-
-
 
 
 
