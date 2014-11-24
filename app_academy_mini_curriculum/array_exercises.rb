@@ -42,81 +42,110 @@
 
 #require "debugger"
 
-pile_1 = [1, 2, 3]
-pile_2 = []
-pile_3 =[]
-answer = [1, 2, 3]
+# pile_1 = [1, 2, 3]
+# pile_2 = []
+# pile_3 =[]
+# answer = [1, 2, 3]
 
 
 
 
-def pile_pick(pile_1, pile_2, pile_3)
-  choice = gets.chomp
-  if choice == "1" && !pile_1.empty?
-    puts "Picking from pile 1"
-    pick = pile_1.shift  
-    return pick
-  elsif choice == "2" && !pile_2.empty?
-    puts "Picking from pile 2" 
-    pick = pile_2.shift
-    return pick
-  elsif choice == "3" && !pile_3.empty?
-    puts "Picking from pile 3"
-    pick = pile_3.shift  
-    return pick 
-  else
-    puts "Please choose a pile 1, 2 or 3 OR a pile that is NOT empty"
-    puts "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3}"
-    pile_pick(pile_1, pile_2, pile_3)
-  end    
-end
+# def pile_pick(pile_1, pile_2, pile_3)
+#   choice = gets.chomp
+#   if choice == "1" && !pile_1.empty?
+#     puts "Picking from pile 1"
+#     pick = pile_1.shift  
+#     return pick
+#   elsif choice == "2" && !pile_2.empty?
+#     puts "Picking from pile 2" 
+#     pick = pile_2.shift
+#     return pick
+#   elsif choice == "3" && !pile_3.empty?
+#     puts "Picking from pile 3"
+#     pick = pile_3.shift  
+#     return pick 
+#   else
+#     puts "Please choose a pile 1, 2 or 3 OR a pile that is NOT empty"
+#     puts "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3}"
+#     pile_pick(pile_1, pile_2, pile_3)
+#   end    
+# end
 
-def place_pick(pile_1, pile_2, pile_3, pick)
-  place = gets.chomp
-  pick = pick.to_i
-  if place == "1" && (pile_1.empty? || pick < pile_1[0])
-    puts "You chose 1"
-    pile_1.unshift(pick)
-  elsif place == "2" && (pile_2.empty? || pick < pile_2[0])
-    puts "You chose 2"
-    pile_2.unshift(pick)
-  elsif place == "3" && (pile_3.empty? || pick < pile_3[0])
-    puts "You chose 3"
-    pile_3.unshift(pick)
-  else
-    puts "Please choose 1, 2 or 3"
-    puts "You can only put a disc on a pile if it is empty or it will be sitting on top of a smaller disk"
-    puts "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3}"
-    place_pick(pile_1, pile_2, pile_3, pick)
+# def place_pick(pile_1, pile_2, pile_3, pick)
+#   place = gets.chomp
+#   pick = pick.to_i
+#   if place == "1" && (pile_1.empty? || pick < pile_1[0])
+#     puts "You chose 1"
+#     pile_1.unshift(pick)
+#   elsif place == "2" && (pile_2.empty? || pick < pile_2[0])
+#     puts "You chose 2"
+#     pile_2.unshift(pick)
+#   elsif place == "3" && (pile_3.empty? || pick < pile_3[0])
+#     puts "You chose 3"
+#     pile_3.unshift(pick)
+#   else
+#     puts "Please choose 1, 2 or 3"
+#     puts "You can only put a disc on a pile if it is empty or it will be sitting on top of a smaller disk"
+#     puts "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3}"
+#     place_pick(pile_1, pile_2, pile_3, pick)
+#   end
+# end
+
+# while pile_3 != answer
+#   pile_state = "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3}"
+#   puts pile_state
+#   puts "Which pile do I get a disk from?"
+
+#   pick = pile_pick(pile_1, pile_2, pile_3)
+
+#   puts "You picked up #{pick}"
+#   puts "Where do you want to put your pick?"
+
+#   puts pile_state
+
+#   place_pick(pile_1, pile_2, pile_3, pick)
+
+# end
+
+# puts "You have solved the puzzle!!"
+
+# puts "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3} "
+
+
+
+
+#Transposing matrices from row-oriented to column-oriented
+#Write a method, my_transpose, which will convert between the row-oriented and column-oriented representations.
+
+def my_transpose(matrix)
+  transposed = []
+  matrix[0].length.times do
+    transposed << []
   end
+  row = 0
+  while row < transposed.length
+    column = 0
+    while column < matrix.length
+      transposed[row] << matrix[column][row]
+      column += 1
+    end
+    row += 1
+  end
+  transposed
 end
 
-while pile_3 != answer
-  pile_state = "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3}"
-  puts pile_state
-  puts "Which pile do I get a disk from?"
 
-  pick = pile_pick(pile_1, pile_2, pile_3)
+row_oriented = [[0, 1, 2], [3, 4, 5]]
 
-  puts "You picked up #{pick}"
-  puts "Where do you want to put your pick?"
+colmun_oriented = my_transpose(row_oriented)
 
-  puts pile_state
+p colmun_oriented
 
-  place_pick(pile_1, pile_2, pile_3, pick)
+p colmun_oriented == [[0, 3],[1, 4],[2, 5]]
 
-end
+new_row_orinted = my_transpose(colmun_oriented)
 
-puts "You have solved the puzzle!!"
-
-puts "The piles are pile 1: #{pile_1}, pile 2: #{pile_2}, pile 3: #{pile_3} "
-
-
-
-
-
-
-
+p new_row_orinted
 
 
 
