@@ -27,4 +27,3 @@ def nearest_larger(arr, idx)
   index_larger.sort[0]
 end
 
-p nearest_larger([2, 6, 9, 4, 8], 3)
