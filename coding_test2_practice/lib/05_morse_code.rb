@@ -11,10 +11,10 @@ def morse_encode_word(word)
     "o" => "---", "p" => ".--.", "q" => "--.-", "r" => ".-.", "s" => "...",
     "t" => "-", "u" => "..-", "v" => "...-", "w" => ".--", "x" => "-..-",
     "y" => "-.--", "z" => "--.."}
-  morse_code = ""
+  morse_code = []
   word.each_char do |chr|
-    morse_code = morse_code + morse_hash[chr] + ' '
+    morse_code << morse_hash[chr] 
   end
-  morse_code.strip
+  morse_code.join(' ')
 end
 
