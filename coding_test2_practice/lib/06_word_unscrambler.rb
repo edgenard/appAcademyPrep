@@ -8,6 +8,5 @@ def is_anagram?(word1, word2)
   if word1.split(//).sort == word2.split(//).sort
     return true  
   end
-  false
-  
+  false  
 end
